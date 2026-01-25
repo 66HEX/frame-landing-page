@@ -6,7 +6,6 @@
 
 	let { children } = $props();
 
-	// Register GSAP plugins globally once, before components mount
 	registerGsap();
 
 	onMount(() => {
@@ -14,7 +13,7 @@
 
 		lenis.on('scroll', ScrollTrigger.update);
 
-		gsap.ticker.add((time) => {
+		gsap.ticker.add((time: number) => {
 			lenis.raf(time * 1000);
 		});
 
