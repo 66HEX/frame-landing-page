@@ -56,13 +56,13 @@
 						opacity: 0,
 						scale: 0.95,
 						y: 40,
-						filter: 'blur(10px) contrast(1.2) brightness(0.95)'
+						filter: 'blur(10px)'
 					},
 					{
 						opacity: 1,
 						scale: 1,
 						y: 0,
-						filter: 'blur(0px) contrast(1.2) brightness(0.95)',
+						filter: 'blur(0px)',
 						duration: 1.6,
 						ease: 'custom-ease'
 					},
