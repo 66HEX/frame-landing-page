@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { _, locale } from 'svelte-i18n';
 	import { Download } from 'lucide-svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
@@ -15,73 +16,87 @@
 	const releaseVersion = $derived(release?.version ?? null);
 	const downloadUrl = $derived(release?.htmlUrl ?? fallbackReleaseUrl);
 	const downloadLabel = $derived(
-		releaseVersion ? `Download Frame v${releaseVersion}` : 'Download Frame'
+		releaseVersion
+			? $_('hero.downloadButtonWithVersion', { values: { version: releaseVersion } })
+			: $_('hero.downloadButton')
 	);
 
-	onMount(() => {
-		let tl: gsap.core.Timeline;
-		let titleSplit: SplitText;
-		let descSplit: SplitText;
-		let mounted = true;
+	let titleSplit: SplitText | null = null;
+	let descSplit: SplitText | null = null;
+	let tl: gsap.core.Timeline | null = null;
+	let gsapInstance: GSAP | null = null;
+	let SplitTextClass: typeof SplitText | null = null;
 
-		const init = async () => {
-			await document.fonts.ready;
-			if (!mounted) return;
+	async function initAnimation() {
+		await document.fonts.ready;
 
-			const { getGsap } = await import('$lib/gsap');
-			const { gsap, SplitText } = await getGsap();
+		const { getGsap } = await import('$lib/gsap');
+		const { gsap, SplitText } = await getGsap();
+		gsapInstance = gsap;
+		SplitTextClass = SplitText;
 
-			tl = gsap.timeline();
-			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines' });
-			descSplit = new SplitText(heroDesc, { type: 'lines', mask: 'lines' });
+		if (titleSplit) titleSplit.revert();
+		if (descSplit) descSplit.revert();
+		if (tl) tl.kill();
 
-			tl.fromTo(
-				titleSplit.lines,
+		tl = gsap.timeline();
+		titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines' });
+		descSplit = new SplitText(heroDesc, { type: 'lines', mask: 'lines' });
+
+		tl.fromTo(
+			titleSplit.lines,
+			{ yPercent: 100 },
+			{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' }
+		)
+			.fromTo(
+				descSplit.lines,
 				{ yPercent: 100 },
-				{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' }
+				{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' },
+				'-=1.0'
 			)
-				.fromTo(
-					descSplit.lines,
-					{ yPercent: 100 },
-					{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' },
-					'-=1.0'
-				)
-				.fromTo(
-					heroButtons.children,
-					{ opacity: 0, y: 10 },
-					{ opacity: 1, y: 0, duration: 1.0, ease: 'custom-ease' },
-					'-=0.8'
-				)
-				.fromTo(
-					previewImg,
-					{
-						opacity: 0,
-						scale: 0.95,
-						y: 40,
-						filter: 'blur(10px)'
-					},
-					{
-						opacity: 1,
-						scale: 1,
-						y: 0,
-						filter: 'blur(0px)',
-						duration: 1.6,
-						ease: 'custom-ease'
-					},
-					'-=0.6'
-				);
+			.fromTo(
+				heroButtons.children,
+				{ opacity: 0, y: 10 },
+				{ opacity: 1, y: 0, duration: 1.0, ease: 'custom-ease' },
+				'-=0.8'
+			)
+			.fromTo(
+				previewImg,
+				{
+					opacity: 0,
+					scale: 0.95,
+					y: 40,
+					filter: 'blur(10px)'
+				},
+				{
+					opacity: 1,
+					scale: 1,
+					y: 0,
+					filter: 'blur(0px)',
+					duration: 1.6,
+					ease: 'custom-ease'
+				},
+				'-=0.6'
+			);
 
-			gsap.set([heroTitle, heroDesc, heroButtons], { opacity: 1 });
-		};
+		gsap.set([heroTitle, heroDesc, heroButtons], { opacity: 1 });
+	}
 
-		init();
+	onMount(() => {
+		initAnimation();
 
 		return () => {
-			mounted = false;
 			if (titleSplit) titleSplit.revert();
 			if (descSplit) descSplit.revert();
 			if (tl) tl.kill();
 		};
+	});
+
+	$effect(() => {
+		const currentLocale = $locale;
+		if (currentLocale && gsapInstance) {
+			setTimeout(() => initAnimation(), 50);
+		}
 	});
 </script>
 
@@ -94,15 +109,14 @@
 		bind:this={heroTitle}
 		class="text-foreground mb-4 text-4xl font-medium tracking-tight md:text-5xl opacity-0"
 	>
-		Media conversion <span class="text-ds-blue-600">reimagined.</span>
+		{$_('hero.title')} <span class="text-ds-blue-600">{$_('hero.titleHighlight')}</span>
 	</h1>
 
 	<p
 		bind:this={heroDesc}
 		class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-pretty opacity-0"
 	>
-		A lightning-fast, aesthetically pleasing media converter for macOS, Windows, and Linux. Built
-		with Tauri, Svelte 5, and Rust.
+		{$_('hero.description')}
 	</p>
 
 	<div bind:this={heroButtons} class="gap-4 sm:flex-row flex flex-col items-center opacity-0">

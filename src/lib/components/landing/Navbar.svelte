@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n';
 	import Button from '$lib/components/ui/Button.svelte';
+	import LanguageSwitcher from '$lib/components/ui/LanguageSwitcher.svelte';
 	import logo from '$lib/assets/icons/frame.svg';
 	import { fallbackReleaseUrl, repositoryUrl, type FrameRelease } from '$lib/release';
 	import { ExternalLink, Download } from 'lucide-svelte';
@@ -18,6 +20,7 @@
 			<span class="text-foreground text-sm font-medium tracking-tight">Frame</span>
 		</div>
 		<div class="gap-2 flex items-center">
+			<LanguageSwitcher />
 			<Button
 				class="h-7 text-xs"
 				variant="ghost"
@@ -25,12 +28,12 @@
 				target="_blank"
 				rel="noreferrer"
 			>
-				Github
+				{$_('nav.github')}
 				<ExternalLink class="size-3" />
 			</Button>
 			<Button class="h-7 text-xs" href={downloadUrl} target="_blank" rel="noreferrer">
 				<Download class="size-3" />
-				Download
+				{$_('nav.download')}
 			</Button>
 		</div>
 	</nav>

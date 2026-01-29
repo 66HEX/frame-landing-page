@@ -1,0 +1,69 @@
+{
+	"_meta": {
+		"name": "Deutsch",
+		"flag": "🇩🇪"
+	},
+	"nav": {
+		"github": "Github",
+		"download": "Herunterladen"
+	},
+	"hero": {
+		"title": "Medienkonvertierung",
+		"titleHighlight": "neu gedacht.",
+		"description": "Ein blitzschneller, ästhetisch ansprechender Medienkonverter für macOS, Windows und Linux. Entwickelt mit Tauri, Svelte 5 und Rust.",
+		"downloadButton": "Frame herunterladen",
+		"downloadButtonWithVersion": "Frame v{version} herunterladen"
+	},
+	"features": {
+		"universalFormats": {
+			"title": "Universelle Formate",
+			"description": "Volle Unterstützung für MP4, MKV, WebM und MOV Container. Effizientes Encoding mit H.264, H.265, VP9 und Apple ProRes."
+		},
+		"hardwareAccelerated": {
+			"title": "Hardware-Beschleunigung",
+			"description": "Nutzen Sie native Leistung mit Apple Silicon und NVIDIA NVENC Integration für blitzschnelles, batterieeffizientes Encoding."
+		},
+		"batchWorkflow": {
+			"title": "Stapelverarbeitung",
+			"description": "Unbegrenzte Dateien mit unabhängigen Einstellungen in die Warteschlange stellen. Speichern Sie Ihre Lieblingskonfigurationen als benutzerdefinierte Presets zur Wiederverwendung mit einem Klick."
+		},
+		"multiLanguage": {
+			"title": "Mehrsprachig",
+			"description": "Vollständige Oberflächenlokalisierung mit Unterstützung für 9 Sprachen. Frame erkennt automatisch Ihre Systemsprache für ein nahtloses Erlebnis."
+		}
+	},
+	"story": {
+		"section1": {
+			"highlight": "Frame entstand aus Frustration mit bestehenden Tools.",
+			"text": "Medienkonvertierung sollte keinen Abschluss in Videotechnik oder eine Kommandozeilenschnittstelle erfordern. Wir haben Frame als das Tool entwickelt, das wir selbst nutzen wollten: unsichtbar, wenn Sie es nicht brauchen, und unglaublich leistungsstark, wenn Sie es brauchen. Durch die Nutzung von Tauri und Rust haben wir ein Leistungsniveau erreicht, das sich nativ anfühlt, weil es nativ ist."
+		},
+		"section2": {
+			"text": "Diese Effizienz ermöglicht es uns, ein nahtloses Erlebnis zu bieten, bei dem die Komplexität von FFmpeg hinter einer reaktionsschnellen, flüssigen Oberfläche verborgen ist. Kein Warten mehr auf den Start einer aufgeblähten Anwendung oder Kämpfen mit nicht standardmäßigen UI-Mustern. Alles ist optimiert, um Sie mit so wenigen Klicks wie möglich von der Rohdatei zur endgültigen Ausgabe zu bringen, ohne die Präzision zu opfern, die High-End-Transcoding erfordert."
+		},
+		"section3": {
+			"highlight": "In einer Ära, in der jedes Dienstprogramm ein Konto zu erfordern scheint, hebt sich Frame ab.",
+			"text": "Es ist strikt Local-First-Software. Ihre Mediendateien verlassen niemals Ihr Gerät. Keine serverseitige Verarbeitung, keine Telemetrie, die Ihre Inhalte ausspioniert, und keine Upload-Balken zum Beobachten. Diese architektonische Entscheidung gewährleistet nicht nur absolute Privatsphäre, sondern auch maximale Geschwindigkeit."
+		},
+		"section4": {
+			"highlight": "Unter dem minimalistischen Äußeren verbirgt sich die branchenübliche FFmpeg-Engine.",
+			"text": "Ob Sie Terabytes an Rohmaterial für ein Archiv transcodieren oder nur eine schnelle Bildschirmaufnahme komprimieren, Frame passt sich an. Es bietet die granularen Kontrollen, die Profis brauchen—Bitrate, Codecs, Container—ohne Gelegenheitsnutzer zu überfordern."
+		}
+	},
+	"cta": {
+		"title": "Bereit zum Konvertieren?",
+		"description": "Schließen Sie sich Hunderten von Nutzern an, die zu einer schnelleren, privateren Art der Medienverarbeitung gewechselt haben. Erleben Sie den neuen Standard der Medienverarbeitung.",
+		"downloadButton": "Frame herunterladen",
+		"downloadForMac": "Für macOS herunterladen",
+		"downloadForWindows": "Für Windows herunterladen",
+		"downloadForLinux": "Für Linux herunterladen",
+		"detectedPlatform": "{platform} erkannt. Benötigen Sie einen anderen Build? Durchsuchen Sie alle Downloads auf GitHub.",
+		"browseDownloads": "Alle Download-Optionen auf GitHub durchsuchen."
+	},
+	"footer": {
+		"copyright": "© 2026 Frame. Lizenziert unter GPLv3"
+	},
+	"meta": {
+		"title": "Frame - Moderne Medienkonvertierung",
+		"description": "Ein blitzschneller, datenschutzorientierter Medienkonverter für macOS, Windows und Linux. Mit Tauri und Rust entwickelt, bringt Frame die Leistung von FFmpeg in eine schöne, native Oberfläche."
+	}
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { _, locale } from 'svelte-i18n';
 	import { Download } from 'lucide-svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
@@ -19,70 +20,68 @@
 	const releaseVersion = $derived(release?.version ?? null);
 
 	const withVersion = (label: string) => (releaseVersion ? `${label} · v${releaseVersion}` : label);
-	const fallbackButtonLabel = $derived(withVersion('Download Frame'));
 
 	let primaryDownloadUrl = $state(fallbackReleaseUrl);
-	let buttonLabel = $state('Download Frame');
+	let buttonLabel = $state('');
 	let platformLabel = $state('');
+	let detectedOs = $state<'mac' | 'windows' | 'linux' | 'unknown'>('unknown');
 
-	$effect(() => {
-		primaryDownloadUrl = releasesPageUrl;
-		buttonLabel = fallbackButtonLabel;
-	});
+	let ctaTitleSplit: SplitText | null = null;
+	let ctaDescSplit: SplitText | null = null;
+	let ctaTl: gsap.core.Timeline | null = null;
+	let gsapInstance: GSAP | null = null;
+
+	async function initAnimation() {
+		await document.fonts.ready;
+
+		const { getGsap } = await import('$lib/gsap');
+		const { gsap, SplitText } = await getGsap();
+		gsapInstance = gsap;
+
+		if (ctaTitleSplit) ctaTitleSplit.revert();
+		if (ctaDescSplit) ctaDescSplit.revert();
+		if (ctaTl) ctaTl.kill();
+
+		ctaTitleSplit = new SplitText(ctaSection.querySelector('h2'), {
+			type: 'lines',
+			mask: 'lines'
+		});
+		ctaDescSplit = new SplitText(ctaSection.querySelector('p'), {
+			type: 'lines',
+			mask: 'lines'
+		});
+
+		ctaTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ctaSection,
+				start: 'top 85%'
+			}
+		});
+
+		ctaTl
+			.fromTo(
+				ctaTitleSplit.lines,
+				{ yPercent: 100 },
+				{ yPercent: 0, duration: 1.2, ease: 'custom-ease' }
+			)
+			.fromTo(
+				ctaDescSplit.lines,
+				{ yPercent: 100 },
+				{ yPercent: 0, stagger: 0.1, duration: 1.2, ease: 'custom-ease' },
+				'-=0.8'
+			)
+			.fromTo(
+				ctaSection.querySelectorAll('a'),
+				{ opacity: 0, y: 10 },
+				{ opacity: 1, y: 0, stagger: 0.1, duration: 1.0, ease: 'custom-ease' },
+				'-=0.8'
+			);
+	}
 
 	onMount(() => {
-		let ctaTitleSplit: SplitText;
-		let ctaDescSplit: SplitText;
-		let ctaTl: gsap.core.Timeline;
-		let mounted = true;
-
-		const init = async () => {
-			await document.fonts.ready;
-			if (!mounted) return;
-
-			const { getGsap } = await import('$lib/gsap');
-			const { gsap, SplitText } = await getGsap();
-
-			ctaTitleSplit = new SplitText(ctaSection.querySelector('h2'), {
-				type: 'lines',
-				mask: 'lines'
-			});
-			ctaDescSplit = new SplitText(ctaSection.querySelector('p'), {
-				type: 'lines',
-				mask: 'lines'
-			});
-
-			ctaTl = gsap.timeline({
-				scrollTrigger: {
-					trigger: ctaSection,
-					start: 'top 85%'
-				}
-			});
-
-			ctaTl
-				.fromTo(
-					ctaTitleSplit.lines,
-					{ yPercent: 100 },
-					{ yPercent: 0, duration: 1.2, ease: 'custom-ease' }
-				)
-				.fromTo(
-					ctaDescSplit.lines,
-					{ yPercent: 100 },
-					{ yPercent: 0, stagger: 0.1, duration: 1.2, ease: 'custom-ease' },
-					'-=0.8'
-				)
-				.fromTo(
-					ctaSection.querySelectorAll('a'),
-					{ opacity: 0, y: 10 },
-					{ opacity: 1, y: 0, stagger: 0.1, duration: 1.0, ease: 'custom-ease' },
-					'-=0.8'
-				);
-		};
-
-		init();
+		initAnimation();
 
 		return () => {
-			mounted = false;
 			if (ctaTitleSplit) ctaTitleSplit.revert();
 			if (ctaDescSplit) ctaDescSplit.revert();
 			if (ctaTl) ctaTl.kill();
@@ -94,9 +93,13 @@
 
 		if (platform.os !== 'unknown') {
 			platformLabel = formatPlatformLabel(platform);
+			detectedOs = platform.os;
 		} else {
 			platformLabel = '';
+			detectedOs = 'unknown';
 		}
+
+		primaryDownloadUrl = releasesPageUrl;
 
 		if (!release) return;
 
@@ -104,18 +107,26 @@
 		if (!installer) return;
 
 		primaryDownloadUrl = installer.url;
+	});
 
-		if (platform.os === 'mac') {
-			buttonLabel = withVersion('Download for macOS');
-			return;
+	$effect(() => {
+		const currentLocale = $locale;
+		if (currentLocale && gsapInstance) {
+			setTimeout(() => initAnimation(), 50);
 		}
+	});
 
-		if (platform.os === 'windows') {
-			buttonLabel = withVersion('Download for Windows');
-			return;
+	const computedButtonLabel = $derived(() => {
+		if (detectedOs === 'mac') {
+			return withVersion($_('cta.downloadForMac'));
 		}
-
-		buttonLabel = withVersion('Download for Linux');
+		if (detectedOs === 'windows') {
+			return withVersion($_('cta.downloadForWindows'));
+		}
+		if (detectedOs === 'linux') {
+			return withVersion($_('cta.downloadForLinux'));
+		}
+		return withVersion($_('cta.downloadButton'));
 	});
 </script>
 
@@ -123,20 +134,19 @@
 	<Grid></Grid>
 	<div class="flex flex-col items-start justify-center">
 		<h2 class="mb-4 text-2xl font-medium tracking-tight md:text-4xl text-left">
-			Ready to convert?
+			{$_('cta.title')}
 		</h2>
 		<p
 			class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 		>
-			Join hundreds of users who have switched to a faster, more private way to handle their media.
-			Experience the new standard of media processing.
+			{$_('cta.description')}
 		</p>
 	</div>
 
 	<Button href={primaryDownloadUrl} target="_blank" rel="noreferrer" class="w-fit">
 		<Download />
 
-		{buttonLabel}
+		{computedButtonLabel()}
 	</Button>
 
 	<a
@@ -146,9 +156,9 @@
 		class="text-gray-alpha-600 mt-4 text-xs hover:text-foreground w-fit transition-colors"
 	>
 		{#if platformLabel}
-			Detected {platformLabel}. Need another build? Browse all downloads on GitHub.
+			{$_('cta.detectedPlatform', { values: { platform: platformLabel } })}
 		{:else}
-			Browse all download options on GitHub.
+			{$_('cta.browseDownloads')}
 		{/if}
 	</a>
 </section>

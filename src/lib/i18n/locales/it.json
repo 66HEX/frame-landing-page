@@ -1,0 +1,69 @@
+{
+	"_meta": {
+		"name": "Italiano",
+		"flag": "🇮🇹"
+	},
+	"nav": {
+		"github": "Github",
+		"download": "Scarica"
+	},
+	"hero": {
+		"title": "Conversione media",
+		"titleHighlight": "reinventata.",
+		"description": "Un convertitore media velocissimo ed esteticamente piacevole per macOS, Windows e Linux. Costruito con Tauri, Svelte 5 e Rust.",
+		"downloadButton": "Scarica Frame",
+		"downloadButtonWithVersion": "Scarica Frame v{version}"
+	},
+	"features": {
+		"universalFormats": {
+			"title": "Formati Universali",
+			"description": "Supporto completo per contenitori MP4, MKV, WebM e MOV. Codifica efficiente con H.264, H.265, VP9 e Apple ProRes."
+		},
+		"hardwareAccelerated": {
+			"title": "Accelerazione Hardware",
+			"description": "Sfrutta la potenza nativa con l'integrazione Apple Silicon e NVIDIA NVENC per una codifica velocissima ed efficiente dal punto di vista energetico."
+		},
+		"batchWorkflow": {
+			"title": "Flusso di Lavoro Batch",
+			"description": "Accoda file illimitati con impostazioni indipendenti. Salva le tue configurazioni preferite come preset personalizzati per il riutilizzo con un clic."
+		},
+		"multiLanguage": {
+			"title": "Multilingua",
+			"description": "Localizzazione completa dell'interfaccia con supporto per 9 lingue. Frame rileva automaticamente la lingua del tuo sistema per un'esperienza fluida."
+		}
+	},
+	"story": {
+		"section1": {
+			"highlight": "Frame è nato dalla frustrazione con gli strumenti esistenti.",
+			"text": "La conversione media non dovrebbe richiedere una laurea in ingegneria video o un'interfaccia a riga di comando. Abbiamo costruito Frame per essere lo strumento che volevamo usare: invisibile quando non ne hai bisogno, e incredibilmente potente quando ne hai bisogno. Sfruttando Tauri e Rust, abbiamo raggiunto un livello di prestazioni che sembra nativo perché lo è."
+		},
+		"section2": {
+			"text": "Questa efficienza ci permette di fornire un'esperienza fluida dove la complessità di FFmpeg è nascosta dietro un'interfaccia reattiva e fluida. Niente più attese per l'avvio di un'applicazione gonfia o lotte con pattern UI non standard. Tutto è ottimizzato per portarti dal file grezzo all'output finale con il minor numero di clic possibile, senza sacrificare la precisione che richiede la transcodifica di alta gamma."
+		},
+		"section3": {
+			"highlight": "In un'era in cui ogni utility sembra richiedere un account, Frame si distingue.",
+			"text": "È rigorosamente software local-first. I tuoi file media non lasciano mai il tuo dispositivo. Nessuna elaborazione lato server, nessuna telemetria che spia i tuoi contenuti, e nessuna barra di caricamento da osservare. Questa decisione architetturale garantisce non solo privacy assoluta ma anche massima velocità."
+		},
+		"section4": {
+			"highlight": "Sotto l'esterno minimalista si trova il motore FFmpeg, standard del settore.",
+			"text": "Che tu stia transcodificando terabyte di filmati grezzi per un archivio o semplicemente comprimendo una rapida registrazione dello schermo, Frame si adatta. Espone i controlli granulari di cui i professionisti hanno bisogno—bitrate, codec, contenitori—senza sopraffare gli utenti occasionali."
+		}
+	},
+	"cta": {
+		"title": "Pronto a convertire?",
+		"description": "Unisciti a centinaia di utenti che sono passati a un modo più veloce e privato di gestire i loro media. Sperimenta il nuovo standard dell'elaborazione media.",
+		"downloadButton": "Scarica Frame",
+		"downloadForMac": "Scarica per macOS",
+		"downloadForWindows": "Scarica per Windows",
+		"downloadForLinux": "Scarica per Linux",
+		"detectedPlatform": "Rilevato {platform}. Hai bisogno di un'altra build? Sfoglia tutti i download su GitHub.",
+		"browseDownloads": "Sfoglia tutte le opzioni di download su GitHub."
+	},
+	"footer": {
+		"copyright": "© 2026 Frame. Licenza GPLv3"
+	},
+	"meta": {
+		"title": "Frame - Conversione Media Moderna",
+		"description": "Un convertitore media velocissimo e incentrato sulla privacy per macOS, Windows e Linux. Costruito con Tauri e Rust, Frame porta la potenza di FFmpeg in una bella interfaccia nativa."
+	}
+}

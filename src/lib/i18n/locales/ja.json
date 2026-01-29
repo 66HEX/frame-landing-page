@@ -1,0 +1,69 @@
+{
+	"_meta": {
+		"name": "日本語",
+		"flag": "🇯🇵"
+	},
+	"nav": {
+		"github": "Github",
+		"download": "ダウンロード"
+	},
+	"hero": {
+		"title": "メディア変換を",
+		"titleHighlight": "再定義。",
+		"description": "macOS、Windows、Linux 向けの超高速で美しいメディアコンバーター。Tauri、Svelte 5、Rust で構築。",
+		"downloadButton": "Frame をダウンロード",
+		"downloadButtonWithVersion": "Frame v{version} をダウンロード"
+	},
+	"features": {
+		"universalFormats": {
+			"title": "ユニバーサルフォーマット",
+			"description": "MP4、MKV、WebM、MOV コンテナを完全サポート。H.264、H.265、VP9、Apple ProRes で効率的にエンコード。"
+		},
+		"hardwareAccelerated": {
+			"title": "ハードウェアアクセラレーション",
+			"description": "Apple Silicon と NVIDIA NVENC 統合によるネイティブパワーを活用し、超高速でバッテリー効率の良いエンコードを実現。"
+		},
+		"batchWorkflow": {
+			"title": "バッチワークフロー",
+			"description": "独立した設定で無制限のファイルをキューに追加。お気に入りの設定をカスタムプリセットとして保存し、ワンクリックで再利用。"
+		},
+		"multiLanguage": {
+			"title": "多言語対応",
+			"description": "9 言語をサポートする完全なインターフェースローカライゼーション。Frame はシステム言語を自動検出し、シームレスな体験を提供します。"
+		}
+	},
+	"story": {
+		"section1": {
+			"highlight": "Frame は既存ツールへの不満から生まれました。",
+			"text": "メディア変換にビデオエンジニアリングの学位やコマンドラインインターフェースは必要ありません。私たちは Frame を、必要ないときは見えず、必要なときは驚くほど強力な、使いたいツールとして構築しました。Tauri と Rust を活用することで、ネイティブのようなパフォーマンスを実現しました。なぜなら、それは本当にネイティブだからです。"
+		},
+		"section2": {
+			"text": "この効率性により、FFmpeg の複雑さをレスポンシブで流動的なインターフェースの背後に隠したシームレスな体験を提供できます。肥大化したアプリケーションの起動を待ったり、非標準の UI パターンに苦労したりする必要はもうありません。すべてが最適化されており、高品質なトランスコーディングに必要な精度を犠牲にすることなく、できるだけ少ないクリックで生ファイルから最終出力まで到達できます。"
+		},
+		"section3": {
+			"highlight": "あらゆるユーティリティがアカウントを必要とするように見える時代に、Frame は一線を画しています。",
+			"text": "これは厳密にローカルファーストのソフトウェアです。メディアファイルがデバイスから離れることはありません。サーバーサイド処理も、コンテンツを監視するテレメトリも、見守るアップロードバーもありません。このアーキテクチャの決定により、絶対的なプライバシーだけでなく、最大の速度も保証されます。"
+		},
+		"section4": {
+			"highlight": "ミニマリストな外観の下には、業界標準の FFmpeg エンジンがあります。",
+			"text": "アーカイブ用にテラバイトの生映像をトランスコードする場合でも、簡単な画面録画を圧縮する場合でも、Frame は適応します。ビットレート、コーデック、コンテナなど、プロフェッショナルが必要とする詳細なコントロールを、カジュアルユーザーを圧倒することなく提供します。"
+		}
+	},
+	"cta": {
+		"title": "変換の準備はできましたか？",
+		"description": "より速く、よりプライベートなメディア処理方法に切り替えた数百人のユーザーに参加しましょう。メディア処理の新しい標準を体験してください。",
+		"downloadButton": "Frame をダウンロード",
+		"downloadForMac": "macOS 版をダウンロード",
+		"downloadForWindows": "Windows 版をダウンロード",
+		"downloadForLinux": "Linux 版をダウンロード",
+		"detectedPlatform": "{platform} を検出しました。別のビルドが必要ですか？GitHub ですべてのダウンロードを参照してください。",
+		"browseDownloads": "GitHub ですべてのダウンロードオプションを参照。"
+	},
+	"footer": {
+		"copyright": "© 2026 Frame。GPLv3 ライセンス"
+	},
+	"meta": {
+		"title": "Frame - モダンメディア変換",
+		"description": "macOS、Windows、Linux 向けの超高速でプライバシー重視のメディアコンバーター。Tauri と Rust で構築された Frame は、FFmpeg のパワーを美しいネイティブインターフェースに統合します。"
+	}
+}
