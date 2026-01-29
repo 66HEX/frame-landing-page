@@ -1,48 +1,62 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Cpu, FileVideo, Layers } from 'lucide-svelte';
-	import { gsap, SplitText } from '$lib/gsap';
+	import { _, locale } from 'svelte-i18n';
+	import { Cpu, FilePlay, Layers, Languages } from 'lucide-svelte';
 
 	let container: HTMLElement;
+	let splits: SplitText[] = [];
+	let gsapInstance: GSAP | null = null;
 
-	onMount(() => {
-		let splits: SplitText[] = [];
-		let mounted = true;
+	function isCJKLocale(loc: string | null | undefined): boolean {
+		if (!loc) return false;
+		return ['zh', 'ja', 'ko'].includes(loc);
+	}
 
-		const init = async () => {
-			await document.fonts.ready;
-			if (!mounted) return;
+	async function initAnimation() {
+		await document.fonts.ready;
 
-			const gridItems = container.querySelectorAll('.grid-feature');
+		const { getGsap } = await import('$lib/gsap');
+		const { gsap, SplitText } = await getGsap();
+		gsapInstance = gsap;
 
-			gridItems.forEach((item, i) => {
-				const icon = item.querySelector('svg');
-				const textSplit = new SplitText(item.querySelectorAll('h3, p'), {
+		splits.forEach((s) => s.revert());
+		splits = [];
+
+		const gridItems = container.querySelectorAll('.grid-feature');
+		const currentLocale = $locale;
+		const useSplitText = !isCJKLocale(currentLocale);
+
+		gridItems.forEach((item, i) => {
+			const icon = item.querySelector('svg');
+			const textElements = item.querySelectorAll('h3, p');
+
+			if (icon) {
+				gsap.fromTo(
+					icon,
+					{
+						scale: 0,
+						rotate: -10
+					},
+					{
+						scrollTrigger: {
+							trigger: item,
+							start: 'top 85%'
+						},
+						scale: 1,
+						rotate: 0,
+						duration: 0.8,
+						ease: 'back.out(1.7)',
+						delay: i * 0.5
+					}
+				);
+			}
+
+			if (useSplitText) {
+				const textSplit = new SplitText(textElements, {
 					type: 'lines',
 					mask: 'lines'
 				});
 				splits.push(textSplit);
-
-				if (icon) {
-					gsap.fromTo(
-						icon,
-						{
-							scale: 0,
-							rotate: -10
-						},
-						{
-							scrollTrigger: {
-								trigger: item,
-								start: 'top 85%'
-							},
-							scale: 1,
-							rotate: 0,
-							duration: 0.8,
-							ease: 'back.out(1.7)',
-							delay: i * 0.5
-						}
-					);
-				}
 
 				gsap.fromTo(
 					textSplit.lines,
@@ -59,35 +73,60 @@
 						delay: i * 0.5
 					}
 				);
-			});
-		};
+			} else {
+				// CJK languages use fade-in animation
+				gsap.fromTo(
+					textElements,
+					{ opacity: 0, y: 20 },
+					{
+						scrollTrigger: {
+							trigger: item,
+							start: 'top 85%'
+						},
+						opacity: 1,
+						y: 0,
+						stagger: 0.1,
+						duration: 0.8,
+						ease: 'custom-ease',
+						delay: i * 0.3
+					}
+				);
+			}
+		});
+	}
 
-		init();
+	onMount(() => {
+		initAnimation();
 
 		return () => {
-			mounted = false;
 			splits.forEach((s) => s.revert());
 		};
+	});
+
+	$effect(() => {
+		const currentLocale = $locale;
+		if (currentLocale && gsapInstance) {
+			setTimeout(() => initAnimation(), 50);
+		}
 	});
 </script>
 
 <section
 	id="features"
 	bind:this={container}
-	class="lg:grid-cols-3 lg:divide-y-0 md:divide-x divide-gray-alpha-100 grid w-full grid-cols-1 divide-y"
+	class="lg:grid-cols-4 lg:divide-y-0 md:divide-x divide-gray-alpha-100 grid w-full grid-cols-1 divide-y"
 >
 	<div
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<FileVideo class="size-6 md:size-8 text-ds-blue-600 pb-1" />
+			<FilePlay class="size-6 md:size-8 text-ds-blue-600 pb-1" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Universal Formats
+				{$_('features.universalFormats.title')}
 			</h3>
 		</div>
 		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Full support for MP4, MKV, WebM, and MOV containers. Encode efficiently with H.264, H.265,
-			VP9, and Apple ProRes.
+			{$_('features.universalFormats.description')}
 		</p>
 	</div>
 
@@ -97,12 +136,11 @@
 		<div class="gap-2 flex items-center">
 			<Cpu class="size-6 md:size-8 text-ds-blue-600 pb-0.5" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Hardware Accelerated
+				{$_('features.hardwareAccelerated.title')}
 			</h3>
 		</div>
 		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Leverage native power with Apple Silicon and NVIDIA NVENC integration for lightning-fast,
-			battery-efficient encoding.
+			{$_('features.hardwareAccelerated.description')}
 		</p>
 	</div>
 
@@ -112,12 +150,25 @@
 		<div class="gap-2 flex items-center">
 			<Layers class="size-6 md:size-8 text-ds-blue-600 pb-0.5" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Batch Workflow
+				{$_('features.batchWorkflow.title')}
 			</h3>
 		</div>
 		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Queue unlimited files with independent settings. Save your favorite configurations as custom
-			presets for one-click reuse.
+			{$_('features.batchWorkflow.description')}
+		</p>
+	</div>
+
+	<div
+		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
+	>
+		<div class="gap-2 flex items-center">
+			<Languages class="size-6 md:size-8 text-ds-blue-600 pb-0.5" />
+			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
+				{$_('features.multiLanguage.title')}
+			</h3>
+		</div>
+		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
+			{$_('features.multiLanguage.description')}
 		</p>
 	</div>
 </section>

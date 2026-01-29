@@ -1,0 +1,69 @@
+{
+	"_meta": {
+		"name": "简体中文",
+		"flag": "🇨🇳"
+	},
+	"nav": {
+		"github": "Github",
+		"download": "下载"
+	},
+	"hero": {
+		"title": "重新定义",
+		"titleHighlight": "媒体转换",
+		"description": "一款闪电般快速、美观的媒体转换器，支持 macOS、Windows 和 Linux。基于 Tauri、Svelte 5 和 Rust 构建。",
+		"downloadButton": "下载 Frame",
+		"downloadButtonWithVersion": "下载 Frame v{version}"
+	},
+	"features": {
+		"universalFormats": {
+			"title": "通用格式",
+			"description": "全面支持 MP4、MKV、WebM 和 MOV 容器。高效编码 H.264、H.265、VP9 和 Apple ProRes。"
+		},
+		"hardwareAccelerated": {
+			"title": "硬件加速",
+			"description": "利用 Apple Silicon 和 NVIDIA NVENC 集成的原生性能，实现闪电般快速、节能的编码。"
+		},
+		"batchWorkflow": {
+			"title": "批量工作流",
+			"description": "无限排队文件，独立设置。将您喜欢的配置保存为自定义预设，一键重复使用。"
+		},
+		"multiLanguage": {
+			"title": "多语言支持",
+			"description": "完整的界面本地化，支持 9 种语言。Frame 自动检测您的系统语言，提供无缝体验。"
+		}
+	},
+	"story": {
+		"section1": {
+			"highlight": "Frame 诞生于对现有工具的不满。",
+			"text": "媒体转换不应该需要视频工程学位或命令行界面。我们构建 Frame 是为了成为我们想要使用的工具：在您不需要时隐形，在您需要时强大无比。通过利用 Tauri 和 Rust，我们实现了原生般的性能体验，因为它本身就是原生的。"
+		},
+		"section2": {
+			"text": "这种效率使我们能够提供无缝体验，将 FFmpeg 的复杂性隐藏在响应迅速、流畅的界面背后。这意味着不再需要等待臃肿的应用程序启动，也不再需要与非标准的 UI 模式作斗争。一切都经过优化，让您以尽可能少的点击从原始文件到最终输出，同时不牺牲高端转码所需的精度。"
+		},
+		"section3": {
+			"highlight": "在每个工具似乎都需要账户的时代，Frame 独树一帜。",
+			"text": "它是严格的本地优先软件。您的媒体文件永远不会离开您的设备。没有服务器端处理，没有窥探您内容的遥测，也没有上传进度条需要观看。这种架构决策不仅确保了绝对的隐私，还确保了最大的速度。"
+		},
+		"section4": {
+			"highlight": "在极简的外表下是行业标准的 FFmpeg 引擎。",
+			"text": "无论您是为存档转码数 TB 的原始素材，还是只是压缩一个快速的屏幕录制，Frame 都能适应。它提供专业人士需要的精细控制——比特率、编解码器、容器——而不会让普通用户感到不知所措。"
+		}
+	},
+	"cta": {
+		"title": "准备好转换了吗？",
+		"description": "加入数百名已经转向更快、更私密的媒体处理方式的用户。体验媒体处理的新标准。",
+		"downloadButton": "下载 Frame",
+		"downloadForMac": "下载 macOS 版",
+		"downloadForWindows": "下载 Windows 版",
+		"downloadForLinux": "下载 Linux 版",
+		"detectedPlatform": "检测到 {platform}。需要其他版本？在 GitHub 上浏览所有下载。",
+		"browseDownloads": "在 GitHub 上浏览所有下载选项。"
+	},
+	"footer": {
+		"copyright": "© 2026 Frame。基于 GPLv3 许可"
+	},
+	"meta": {
+		"title": "Frame - 现代媒体转换",
+		"description": "一款闪电般快速、注重隐私的媒体转换器，支持 macOS、Windows 和 Linux。基于 Tauri 和 Rust 构建，Frame 将 FFmpeg 的强大功能融入美观的原生界面。"
+	}
+}

@@ -1,22 +1,35 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { gsap, SplitText } from '$lib/gsap';
+	import { _, locale } from 'svelte-i18n';
 
 	let section1: HTMLElement;
 	let section2: HTMLElement;
+	let splits: SplitText[] = [];
+	let gsapInstance: GSAP | null = null;
 
-	onMount(() => {
-		let splits: SplitText[] = [];
-		let mounted = true;
+	function isCJKLocale(loc: string | null | undefined): boolean {
+		if (!loc) return false;
+		return ['zh', 'ja', 'ko'].includes(loc);
+	}
 
-		const init = async () => {
-			await document.fonts.ready;
-			if (!mounted) return;
+	async function initAnimation() {
+		await document.fonts.ready;
 
-			if (section1) {
-				const paragraphs1 = Array.from(section1.querySelectorAll('p'));
+		const { getGsap } = await import('$lib/gsap');
+		const { gsap, SplitText } = await getGsap();
+		gsapInstance = gsap;
+
+		splits.forEach((split) => split.revert());
+		splits = [];
+
+		const currentLocale = $locale;
+		const useSplitText = !isCJKLocale(currentLocale);
+
+		if (section1) {
+			const paragraphs1 = Array.from(section1.querySelectorAll('p'));
+
+			if (useSplitText) {
 				const lines1: Element[] = [];
-
 				paragraphs1.forEach((p) => {
 					const split = new SplitText(p, { type: 'lines', mask: 'lines' });
 					splits.push(split);
@@ -40,11 +53,30 @@
 						}
 					);
 				}
+			} else {
+				// CJK languages use fade-in animation
+				gsap.fromTo(
+					paragraphs1,
+					{ opacity: 0, y: 30 },
+					{
+						scrollTrigger: {
+							trigger: section1,
+							start: 'top 85%'
+						},
+						opacity: 1,
+						y: 0,
+						stagger: 0.2,
+						duration: 1,
+						ease: 'custom-ease'
+					}
+				);
 			}
+		}
 
-			if (section2) {
-				const paragraphs2 = Array.from(section2.querySelectorAll('p'));
+		if (section2) {
+			const paragraphs2 = Array.from(section2.querySelectorAll('p'));
 
+			if (useSplitText) {
 				paragraphs2.forEach((paragraph, index) => {
 					const split = new SplitText(paragraph, {
 						type: 'lines',
@@ -68,15 +100,42 @@
 						}
 					);
 				});
+			} else {
+				// CJK 语言使用整段淡入动画
+				paragraphs2.forEach((paragraph, index) => {
+					gsap.fromTo(
+						paragraph,
+						{ opacity: 0, y: 30 },
+						{
+							scrollTrigger: {
+								trigger: paragraph,
+								start: 'top 85%'
+							},
+							opacity: 1,
+							y: 0,
+							duration: 1,
+							ease: 'custom-ease',
+							delay: index * 0.2
+						}
+					);
+				});
 			}
-		};
+		}
+	}
 
-		init();
+	onMount(() => {
+		initAnimation();
 
 		return () => {
-			mounted = false;
 			splits.forEach((split) => split.revert());
 		};
+	});
+
+	$effect(() => {
+		const currentLocale = $locale;
+		if (currentLocale && gsapInstance) {
+			setTimeout(() => initAnimation(), 50);
+		}
 	});
 </script>
 
@@ -85,41 +144,30 @@
 	class="lg:grid-cols-2 lg:divide-x divide-gray-alpha-100 lg:divide-y-0 grid w-full grid-cols-1 divide-y"
 >
 	<div bind:this={section1} class="px-4 md:px-8 py-8 gap-4 divide-gray-alpha-100 flex flex-col">
-		<p class="text-gray-alpha-600 text-lg leading-relaxed md:text-xl text-pretty">
+		<p class="text-gray-alpha-600 text-lg leading-relaxed md:text-xl">
 			<span class="text-foreground font-medium tracking-tight">
-				Frame was born from a frustration with existing tools.
+				{$_('story.section1.highlight')}
 			</span>
-			Media conversion shouldn't require a degree in video engineering or a command-line interface. We
-			built Frame to be the tool we wanted to use: invisible when you don't need it, and incredibly powerful
-			when you do. By leveraging Tauri and Rust, we've achieved a level of performance that feels native
-			because it is native.
+			{$_('story.section1.text')}
 		</p>
-		<p class="text-gray-alpha-600 text-lg leading-relaxed md:text-xl text-pretty">
-			This efficiency allows us to provide a seamless experience where the complexity of FFmpeg is
-			tucked away behind a responsive, fluid interface. It means no more waiting for a bloated
-			application to launch or struggling with non-standard UI patterns. Everything is optimized to
-			get you from raw file to final output with as few clicks as possible, without sacrificing the
-			precision that high-end transcoding requires.
+		<p class="text-gray-alpha-600 text-lg leading-relaxed md:text-xl">
+			{$_('story.section2.text')}
 		</p>
 	</div>
 
 	<div bind:this={section2} class="divide-gray-alpha-100 flex flex-col divide-y">
-		<p class="px-4 md:px-8 py-8 text-gray-alpha-600 text-lg leading-relaxed md:text-xl text-pretty">
+		<p class="px-4 md:px-8 py-8 text-gray-alpha-600 text-lg leading-relaxed md:text-xl">
 			<span class="text-foreground font-medium tracking-tight">
-				In an era where every utility seems to require an account, Frame stands apart.
+				{$_('story.section3.highlight')}
 			</span>
-			It is strictly local-first software. Your media files never leave your device. There is no server-side
-			processing, no telemetry that spies on your content, and no upload bars to watch. This architectural
-			decision ensures not only absolute privacy but also maximum speed.
+			{$_('story.section3.text')}
 		</p>
 
-		<p class="px-4 md:px-8 py-8 text-gray-alpha-600 text-lg leading-relaxed md:text-xl text-pretty">
+		<p class="px-4 md:px-8 py-8 text-gray-alpha-600 text-lg leading-relaxed md:text-xl">
 			<span class="text-foreground font-medium tracking-tight">
-				Under the minimalist exterior lies the industry-standard FFmpeg engine.
+				{$_('story.section4.highlight')}
 			</span>
-			Whether you're transcoding terabytes of raw footage for an archive or just compressing a quick screen
-			recording, Frame adapts. It exposes the granular controls professionals need—bitrate, codecs, containers—without
-			overwhelming casual users.
+			{$_('story.section4.text')}
 		</p>
 	</div>
 </section>
