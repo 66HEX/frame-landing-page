@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { Download } from 'lucide-svelte';
-	import { gsap, SplitText } from '$lib/gsap';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
 	import {
@@ -40,6 +39,9 @@
 		const init = async () => {
 			await document.fonts.ready;
 			if (!mounted) return;
+
+			const { getGsap } = await import('$lib/gsap');
+			const { gsap, SplitText } = await getGsap();
 
 			ctaTitleSplit = new SplitText(ctaSection.querySelector('h2'), {
 				type: 'lines',

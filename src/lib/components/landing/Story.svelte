@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { gsap, SplitText } from '$lib/gsap';
 
 	let section1: HTMLElement;
 	let section2: HTMLElement;
@@ -12,6 +11,9 @@
 		const init = async () => {
 			await document.fonts.ready;
 			if (!mounted) return;
+
+			const { getGsap } = await import('$lib/gsap');
+			const { gsap, SplitText } = await getGsap();
 
 			if (section1) {
 				const paragraphs1 = Array.from(section1.querySelectorAll('p'));

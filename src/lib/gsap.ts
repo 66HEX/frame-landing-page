@@ -1,15 +1,39 @@
-import { gsap } from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { SplitText } from 'gsap/dist/SplitText';
-import { CustomEase } from 'gsap/dist/CustomEase';
+export let gsap: GSAP;
+export let ScrollTrigger: typeof import('gsap/ScrollTrigger').ScrollTrigger;
+export let SplitText: typeof import('gsap/SplitText').SplitText;
+export let CustomEase: typeof import('gsap/CustomEase').CustomEase;
 
-export function registerGsap() {
-	if (typeof window !== 'undefined') {
+let initPromise: Promise<void> | null = null;
+
+export async function registerGsap() {
+	if (typeof window === 'undefined') return;
+
+	if (initPromise) {
+		await initPromise;
+		return;
+	}
+
+	initPromise = (async () => {
+		const gsapModule = await import('gsap/dist/gsap');
+		const scrollTriggerModule = await import('gsap/dist/ScrollTrigger');
+		const splitTextModule = await import('gsap/dist/SplitText');
+		const customEaseModule = await import('gsap/dist/CustomEase');
+
+		gsap = gsapModule.gsap;
+		ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+		SplitText = splitTextModule.SplitText;
+		CustomEase = customEaseModule.CustomEase;
+
 		gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
 		if (!CustomEase.get('custom-ease')) {
 			CustomEase.create('custom-ease', '0.625, 0.05, 0, 1');
 		}
-	}
+	})();
+
+	await initPromise;
 }
 
-export { gsap, ScrollTrigger, SplitText, CustomEase };
+export async function getGsap() {
+	await registerGsap();
+	return { gsap, ScrollTrigger, SplitText, CustomEase };
+}

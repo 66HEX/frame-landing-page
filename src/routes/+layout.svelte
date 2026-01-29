@@ -2,25 +2,31 @@
 	import './layout.css';
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
-	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 
 	let { children } = $props();
 
-	registerGsap();
-
 	onMount(() => {
-		const lenis = new Lenis();
+		let lenis: Lenis;
 
-		lenis.on('scroll', ScrollTrigger.update);
+		const init = async () => {
+			const { getGsap } = await import('$lib/gsap');
+			const { gsap, ScrollTrigger } = await getGsap();
 
-		gsap.ticker.add((time: number) => {
-			lenis.raf(time * 1000);
-		});
+			lenis = new Lenis();
 
-		gsap.ticker.lagSmoothing(0);
+			lenis.on('scroll', ScrollTrigger.update);
+
+			gsap.ticker.add((time: number) => {
+				lenis.raf(time * 1000);
+			});
+
+			gsap.ticker.lagSmoothing(0);
+		};
+
+		init();
 
 		return () => {
-			lenis.destroy();
+			if (lenis) lenis.destroy();
 		};
 	});
 
