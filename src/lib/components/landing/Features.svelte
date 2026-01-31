@@ -80,7 +80,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<FileVideo class="size-6 md:size-8 text-ds-blue-600 pb-1" />
+			<FileVideo class="size-6 md:size-8 text-ds-blue-600" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Universal Formats
 			</h3>
@@ -95,7 +95,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Cpu class="size-6 md:size-8 text-ds-blue-600 pb-0.5" />
+			<Cpu class="size-6 md:size-8 text-ds-blue-600" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Hardware Accelerated
 			</h3>
@@ -110,7 +110,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Layers class="size-6 md:size-8 text-ds-blue-600 pb-0.5" />
+			<Layers class="size-6 md:size-8 text-ds-blue-600" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Batch Workflow
 			</h3>
