@@ -27,8 +27,8 @@
 	const title = 'Frame - Modern Media Conversion';
 	const description =
 		'A lightning-fast, privacy-focused media converter for macOS, Windows, and Linux. Built with Tauri and Rust, Frame puts the power of FFmpeg in a beautiful, native interface.';
-	const url = 'https://getframe.vercel.app/';
-	const image = 'https://getframe.vercel.app/preview.png';
+	const url = 'https://www.framegui.app/';
+	const image = 'https://www.framegui.app/og-image.jpg';
 </script>
 
 <svelte:head>
