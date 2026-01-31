@@ -1,7 +1,7 @@
-import { gsap } from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { SplitText } from 'gsap/dist/SplitText';
-import { CustomEase } from 'gsap/dist/CustomEase';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import { CustomEase } from 'gsap/CustomEase';
 
 export function registerGsap() {
 	if (typeof window !== 'undefined') {

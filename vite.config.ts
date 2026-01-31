@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	ssr: {
-		noExternal: ['gsap']
+		noExternal: ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', 'gsap/CustomEase']
+	},
+	optimizeDeps: {
+		include: ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', 'gsap/CustomEase']
 	}
 });
