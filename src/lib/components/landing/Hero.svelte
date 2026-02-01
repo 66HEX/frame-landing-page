@@ -36,19 +36,19 @@
 			tl.fromTo(
 				titleSplit.lines,
 				{ yPercent: 100 },
-				{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' }
+				{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' }
 			)
 				.fromTo(
 					descSplit.lines,
 					{ yPercent: 100 },
-					{ yPercent: 0, duration: 1.4, stagger: 0.1, ease: 'custom-ease' },
+					{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' },
 					'-=1.0'
 				)
 				.fromTo(
 					heroButtons.children,
 					{ opacity: 0, y: 10 },
-					{ opacity: 1, y: 0, duration: 1.0, ease: 'custom-ease' },
-					'-=0.8'
+					{ opacity: 1, y: 0, duration: 1.2, ease: 'custom-ease' },
+					'-=1.0'
 				)
 				.fromTo(
 					previewImg,
