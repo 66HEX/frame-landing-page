@@ -2,7 +2,8 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import logo from '$lib/assets/icons/frame.svg';
 	import { fallbackReleaseUrl, repositoryUrl, type FrameRelease } from '$lib/release';
-	import { ExternalLink, Download } from 'lucide-svelte';
+	import ExternalLinkIcon from '$lib/components/icons/ExternalLinkIcon.svelte';
+	import DownloadIcon from '$lib/components/icons/DownloadIcon.svelte';
 
 	const props = $props<{ release: FrameRelease | null }>();
 	const release = $derived(props.release);
@@ -26,10 +27,10 @@
 				rel="noreferrer"
 			>
 				Github
-				<ExternalLink class="size-3" />
+				<ExternalLinkIcon class="size-3" />
 			</Button>
 			<Button class="h-7 text-xs" href={downloadUrl} target="_blank" rel="noreferrer">
-				<Download class="size-3" />
+				<DownloadIcon class="size-3" />
 				Download
 			</Button>
 		</div>

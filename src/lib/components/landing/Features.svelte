@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Cpu, FileVideo, Layers } from 'lucide-svelte';
 	import { gsap, SplitText } from '$lib/gsap';
+	import CpuIcon from '$lib/components/icons/CpuIcon.svelte';
+	import FileVideoIcon from '$lib/components/icons/FileVideoIcon.svelte';
+	import LayersIcon from '$lib/components/icons/LayersIcon.svelte';
 
 	let container: HTMLElement;
 
@@ -80,7 +82,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<FileVideo class="size-6 md:size-8 text-blue-700" />
+			<FileVideoIcon class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Universal Formats
 			</h3>
@@ -95,7 +97,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Cpu class="size-6 md:size-8 text-blue-700" />
+			<CpuIcon class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Hardware Accelerated
 			</h3>
@@ -110,7 +112,7 @@
 		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Layers class="size-6 md:size-8 text-blue-700" />
+			<LayersIcon class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Batch + AI Upscaling
 			</h3>

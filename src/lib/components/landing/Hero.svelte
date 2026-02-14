@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Download } from 'lucide-svelte';
 	import { gsap, SplitText } from '$lib/gsap';
+	import DownloadIcon from '$lib/components/icons/DownloadIcon.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
 	import { fallbackReleaseUrl, type FrameRelease } from '$lib/release';
@@ -105,7 +105,7 @@
 
 	<div bind:this={heroButtons} class="gap-4 sm:flex-row flex flex-col items-center opacity-0">
 		<Button class="group" size="lg" href={downloadUrl} target="_blank" rel="noreferrer">
-			<Download />
+			<DownloadIcon />
 
 			{downloadLabel}
 		</Button>

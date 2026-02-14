@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Download, Heart } from 'lucide-svelte';
 	import { gsap, SplitText } from '$lib/gsap';
+	import DownloadIcon from '$lib/components/icons/DownloadIcon.svelte';
+	import HeartIcon from '$lib/components/icons/HeartIcon.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
 	import {
@@ -134,12 +135,12 @@
 
 	<div class="flex flex-wrap items-center gap-3">
 		<Button href={primaryDownloadUrl} target="_blank" rel="noreferrer" class="w-fit">
-			<Download />
+			<DownloadIcon />
 
 			{buttonLabel}
 		</Button>
 		<Button variant="secondary" href={sponsorshipUrl} target="_blank" rel="noreferrer" class="w-fit">
-			<Heart />
+			<HeartIcon />
 			Sponsor Frame
 		</Button>
 	</div>
