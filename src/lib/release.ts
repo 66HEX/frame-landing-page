@@ -45,6 +45,7 @@ export type UserPlatform =
 const GITHUB_RELEASES_ENDPOINT = 'https://api.github.com/repos/66HEX/frame/releases/latest';
 export const fallbackReleaseUrl = 'https://github.com/66HEX/frame/releases/latest';
 export const repositoryUrl = 'https://github.com/66HEX/frame';
+export const sponsorshipUrl = 'https://github.com/sponsors/66HEX';
 
 const extensionToFormat: Record<string, InstallerFormat> = {
 	'.dmg': 'dmg',

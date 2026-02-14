@@ -86,8 +86,8 @@
 			</h3>
 		</div>
 		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Full support for MP4, MKV, WebM, and MOV containers. Encode efficiently with H.264, H.265,
-			VP9, and Apple ProRes.
+			Full support for MP4, MKV, WebM, MOV, GIF, MP3, M4A, WAV, and FLAC containers. Encode
+			efficiently with H.264, H.265, VP9, AV1, and Apple ProRes.
 		</p>
 	</div>
 
@@ -112,12 +112,12 @@
 		<div class="gap-2 flex items-center">
 			<Layers class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Batch Workflow
+				Batch + AI Upscaling
 			</h3>
 		</div>
 		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Queue unlimited files with independent settings. Save your favorite configurations as custom
-			presets for one-click reuse.
+			Queue unlimited files with independent settings and upscale video using Real-ESRGAN (x2/x4).
+			Save your favorite configurations as custom presets for one-click reuse.
 		</p>
 	</div>
 </section>

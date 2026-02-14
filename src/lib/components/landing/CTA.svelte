@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Download } from 'lucide-svelte';
+	import { Download, Heart } from 'lucide-svelte';
 	import { gsap, SplitText } from '$lib/gsap';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
@@ -9,7 +9,8 @@
 		detectUserPlatform,
 		formatPlatformLabel,
 		fallbackReleaseUrl,
-		resolveInstallerForPlatform
+		resolveInstallerForPlatform,
+		sponsorshipUrl
 	} from '$lib/release';
 
 	let ctaSection: HTMLElement;
@@ -131,11 +132,17 @@
 		</p>
 	</div>
 
-	<Button href={primaryDownloadUrl} target="_blank" rel="noreferrer" class="w-fit">
-		<Download />
+	<div class="flex flex-wrap items-center gap-3">
+		<Button href={primaryDownloadUrl} target="_blank" rel="noreferrer" class="w-fit">
+			<Download />
 
-		{buttonLabel}
-	</Button>
+			{buttonLabel}
+		</Button>
+		<Button variant="secondary" href={sponsorshipUrl} target="_blank" rel="noreferrer" class="w-fit">
+			<Heart />
+			Sponsor Frame
+		</Button>
+	</div>
 
 	<a
 		href={releasesPageUrl}

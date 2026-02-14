@@ -10,7 +10,7 @@
 			variants: {
 				variant: {
 					primary: 'bg-blue-700 hover:bg-blue-700/90 text-foreground button-highlight',
-					secondary: 'bg-[#222122] text-foreground border-gray-alpha-200 hover:bg-[#2E2D2E] border',
+					secondary: 'bg-[#222529] text-foreground border-gray-alpha-200 hover:bg-[#2F3034] border',
 					ghost: 'text-gray-alpha-600 hover:text-foreground'
 				},
 				size: {
