@@ -203,7 +203,7 @@
 	}
 
 	.block.highlight {
-		background: color-mix(in srgb, var(--ds-blue-600) 20%, transparent);
-		border-color: var(--ds-blue-600);
+		background: color-mix(in srgb, var(--ds-blue-700) 20%, transparent);
+		border-color: var(--ds-blue-700);
 	}
 </style>

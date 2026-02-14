@@ -92,7 +92,7 @@
 		bind:this={heroTitle}
 		class="text-foreground mb-4 text-4xl font-medium tracking-tight md:text-5xl opacity-0"
 	>
-		Media conversion <span class="text-ds-blue-600">reimagined.</span>
+		Media conversion <span class="text-blue-700">reimagined.</span>
 	</h1>
 
 	<p
@@ -122,9 +122,9 @@
 		/>
 	</div>
 	<div
-		class="h-25 -bottom-12.5 -left-12.5 md:h-100 md:-bottom-50 md:-left-50 lg:h-200 bg-ds-blue-600/80 lg:-bottom-100 lg:-left-100 absolute z-0 aspect-square rounded-full blur-[100px]"
+		class="h-25 -bottom-12.5 -left-12.5 md:h-100 md:-bottom-50 md:-left-50 lg:h-200 bg-blue-700/80 lg:-bottom-100 lg:-left-100 absolute z-0 aspect-square rounded-full blur-[100px]"
 	></div>
 	<div
-		class="h-25 -top-12.5 -right-12.5 md:h-100 md:-top-50 md:-right-50 lg:h-200 bg-ds-blue-600/80 lg:-top-100 lg:-right-100 absolute z-0 aspect-square rounded-full blur-[100px]"
+		class="h-25 -top-12.5 -right-12.5 md:h-100 md:-top-50 md:-right-50 lg:h-200 bg-blue-700/80 lg:-top-100 lg:-right-100 absolute z-0 aspect-square rounded-full blur-[100px]"
 	></div>
 </section>

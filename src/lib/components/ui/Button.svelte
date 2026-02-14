@@ -5,11 +5,11 @@
 	import { cn } from '$lib/utils';
 
 	const linkVariants = cva(
-		'rounded-lg border border-transparent bg-clip-padding font-medium [&_svg:not([class*="size-"])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-colors [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 ',
+		'rounded-lg   font-medium [&_svg:not([class*="size-"])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-colors [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 ',
 		{
 			variants: {
 				variant: {
-					primary: 'bg-foreground hover:bg-foreground/90 text-black',
+					primary: 'bg-blue-700 hover:bg-blue-700/90 text-foreground button-highlight',
 					secondary: 'bg-[#222122] text-foreground border-gray-alpha-200 hover:bg-[#2E2D2E] border',
 					ghost: 'text-gray-alpha-600 hover:text-foreground'
 				},

@@ -77,10 +77,10 @@
 	class="lg:grid-cols-3 lg:divide-y-0 md:divide-x divide-gray-alpha-100 grid w-full grid-cols-1 divide-y"
 >
 	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
+		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<FileVideo class="size-6 md:size-8 text-ds-blue-600" />
+			<FileVideo class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Universal Formats
 			</h3>
@@ -92,10 +92,10 @@
 	</div>
 
 	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
+		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Cpu class="size-6 md:size-8 text-ds-blue-600" />
+			<Cpu class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Hardware Accelerated
 			</h3>
@@ -107,10 +107,10 @@
 	</div>
 
 	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-ds-blue-600/10 hover:ring-ds-blue-600 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
+		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
 	>
 		<div class="gap-2 flex items-center">
-			<Layers class="size-6 md:size-8 text-ds-blue-600" />
+			<Layers class="size-6 md:size-8 text-blue-700" />
 			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
 				Batch Workflow
 			</h3>
