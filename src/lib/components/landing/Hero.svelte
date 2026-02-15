@@ -30,7 +30,7 @@
 			if (!mounted) return;
 
 			tl = gsap.timeline();
-			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines' });
+			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines', linesClass: 'pb-4' });
 			descSplit = new SplitText(heroDesc, { type: 'lines', mask: 'lines' });
 
 			tl.fromTo(
@@ -90,7 +90,7 @@
 
 	<h1
 		bind:this={heroTitle}
-		class="text-foreground mb-4 text-4xl font-medium tracking-tight md:text-5xl opacity-0"
+		class="text-foreground text-4xl font-medium tracking-tight md:text-5xl opacity-0"
 	>
 		Media conversion <span class="text-blue-700">reimagined.</span>
 	</h1>

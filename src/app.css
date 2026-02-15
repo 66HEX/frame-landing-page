@@ -1,16 +1,8 @@
 @import 'tailwindcss';
 
 @font-face {
-	font-family: 'GeistMono';
-	src: url('/fonts/GeistMono.ttf') format('truetype');
-	font-weight: 200 800;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Geist';
-	src: url('/fonts/Geist.ttf') format('truetype');
+	font-family: 'Archivo';
+	src: url('/fonts/Archivo-VariableFont_wdth,wght.ttf') format('truetype');
 	font-weight: 200 800;
 	font-style: normal;
 	font-display: swap;
@@ -32,7 +24,7 @@ html {
 body {
 	background-color: var(--background);
 	color: var(--foreground);
-	font-family: var(--font-geist), sans-serif;
+	font-family: var(--font-archivo), sans-serif;
 	margin: 0;
 	padding: 0;
 }
@@ -47,8 +39,7 @@ select {
 	--background: #17191d;
 	--foreground: #ffffff;
 	--sidebar: #232529;
-	--font-geist-mono: 'GeistMono', monospace;
-	--font-geist: 'Geist', sans-serif;
+	--font-archivo: 'Archivo', sans-serif;
 
 	--ds-gray-alpha-50: rgba(255, 255, 255, 0.025);
 	--ds-gray-alpha-100: rgba(255, 255, 255, 0.05);
@@ -78,7 +69,6 @@ select {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-sidebar: var(--sidebar);
-	--font-mono: var(--font-geist-mono);
 
 	--color-gray-alpha-50: var(--ds-gray-alpha-50);
 	--color-gray-alpha-100: var(--ds-gray-alpha-100);
