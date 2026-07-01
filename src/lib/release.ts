@@ -43,6 +43,7 @@ export type UserPlatform =
 	  };
 
 const GITHUB_RELEASES_ENDPOINT = 'https://api.github.com/repos/66HEX/frame/releases/latest';
+
 export const fallbackReleaseUrl = 'https://github.com/66HEX/frame/releases/latest';
 export const repositoryUrl = 'https://github.com/66HEX/frame';
 export const sponsorshipUrl = 'https://github.com/sponsors/66HEX';
@@ -56,21 +57,20 @@ const extensionToFormat: Record<string, InstallerFormat> = {
 
 function getInstallerFormat(name: string): InstallerFormat | null {
 	const lowerName = name.toLowerCase();
+
 	for (const extension of Object.keys(extensionToFormat)) {
 		if (lowerName.endsWith(extension)) {
 			return extensionToFormat[extension];
 		}
 	}
+
 	return null;
 }
 
 function getInstallerOS(format: InstallerFormat): InstallerOS {
-	if (format === 'exe') {
-		return 'windows';
-	}
-	if (format === 'dmg') {
-		return 'mac';
-	}
+	if (format === 'exe') return 'windows';
+	if (format === 'dmg') return 'mac';
+
 	return 'linux';
 }
 
@@ -101,7 +101,7 @@ export function parseRelease(data: GithubReleaseResponse): FrameRelease {
 				arch: getInstallerArch(asset.name)
 			} satisfies InstallerAsset;
 		})
-		.filter(Boolean) as InstallerAsset[];
+		.filter((asset): asset is InstallerAsset => Boolean(asset));
 
 	return {
 		name: data.name ?? data.tag_name,
@@ -153,7 +153,9 @@ export function detectUserPlatform(): UserPlatform {
 
 	const enhancedNavigator = navigator as NavigatorWithUAData;
 	const ua = normalizeString(enhancedNavigator.userAgent);
-	const platform = normalizeString(enhancedNavigator.userAgentData?.platform ?? enhancedNavigator.platform);
+	const platform = normalizeString(
+		enhancedNavigator.userAgentData?.platform ?? enhancedNavigator.platform
+	);
 	const architectureHint = normalizeString(enhancedNavigator.userAgentData?.architecture);
 
 	let os: UserPlatform['os'] = 'unknown';
@@ -162,10 +164,7 @@ export function detectUserPlatform(): UserPlatform {
 		os = 'mac';
 	} else if (platform.includes('win') || ua.includes('win')) {
 		os = 'windows';
-	} else if (
-		platform.includes('linux') ||
-		(ua.includes('linux') && !ua.includes('android'))
-	) {
+	} else if (platform.includes('linux') || (ua.includes('linux') && !ua.includes('android'))) {
 		os = 'linux';
 	}
 
@@ -233,8 +232,7 @@ export function formatPlatformLabel(platform: UserPlatform): string {
 		return 'your platform';
 	}
 
-	const osLabel =
-		platform.os === 'mac' ? 'macOS' : platform.os === 'windows' ? 'Windows' : 'Linux';
+	const osLabel = platform.os === 'mac' ? 'macOS' : platform.os === 'windows' ? 'Windows' : 'Linux';
 	const archLabel = platform.arch === 'arm64' ? 'Apple Silicon / ARM64' : 'x64';
 
 	if (platform.os === 'mac') {

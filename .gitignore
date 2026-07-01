@@ -1,21 +1,23 @@
-.DS_Store
 node_modules
-dist
-test-results/
-package-lock.json
-yarn.lock
-vite.config.js.timestamp-*
-/packages/package/test/**/package
-/documentation/types.js
-.env
-.vercel_build_output
-.svelte-kit
-.cloudflare
-.pnpm-debug.log
-.netlify
-.turbo
+
+# Output
+.output
 .vercel
-.test-tmp
-symlink-from
-.idea/
-_tmp_flaky_test_output.txt
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

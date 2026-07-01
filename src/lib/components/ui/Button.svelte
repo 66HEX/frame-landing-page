@@ -1,48 +1,39 @@
 <script lang="ts">
+	import { cva, type VariantProps } from 'class-variance-authority';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
 
-	const linkVariants = cva(
-		'rounded-lg   font-medium [&_svg:not([class*="size-"])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-colors [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 ',
+	const buttonVariants = cva(
+		'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-sm font-medium transition-[background-color,color,transform] duration-100 ease-out [&_svg]:size-4 [&_svg]:shrink-0',
 		{
 			variants: {
 				variant: {
-					primary: 'bg-blue-700 hover:bg-blue-700/90 text-foreground button-highlight',
-					secondary: 'bg-[#222529] text-foreground border-gray-alpha-200 hover:bg-[#2F3034] border',
-					ghost: 'text-gray-alpha-600 hover:text-foreground'
+					primary:
+						'bg-frame-gray-400 text-foreground card-highlight hover:bg-[rgb(235_235_255_/_0.18)]',
+					secondary: 'bg-frame-gray-100 text-foreground card-highlight hover:bg-frame-gray-200',
+					ghost: 'text-frame-gray-600 hover:bg-frame-gray-100 hover:text-foreground'
 				},
 				size: {
-					default:
-						'h-8 gap-1.5 px-2.5 text-sm has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-					xs: 'h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-3',
-					sm: 'h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-3.5',
-					lg: 'h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3',
-					icon: 'size-8',
-					'icon-xs':
-						'size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*="size-"])]:size-3',
-					'icon-sm':
-						'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
-					'icon-lg': 'size-9'
+					sm: 'h-8 gap-1.5 px-2.5 text-sm'
 				}
 			},
 			defaultVariants: {
 				variant: 'primary',
-				size: 'default'
+				size: 'sm'
 			}
 		}
 	);
 
-	interface Props extends HTMLAnchorAttributes, VariantProps<typeof linkVariants> {
-		class?: string;
+	interface Props extends HTMLAnchorAttributes, VariantProps<typeof buttonVariants> {
 		children?: Snippet;
+		class?: string;
 	}
 
-	let { class: className, variant, size, href, children, ...props }: Props = $props();
+	let { children, class: className, variant, size, ...props }: Props = $props();
 </script>
 
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-<a {href} class={cn(linkVariants({ variant, size }), className)} {...props}>
+<a class={cn(buttonVariants({ variant, size }), className)} {...props}>
 	{@render children?.()}
 </a>

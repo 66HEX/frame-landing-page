@@ -1,125 +1,92 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap, SplitText } from '$lib/gsap';
-	import CpuIcon from '$lib/components/icons/CpuIcon.svelte';
-	import FileVideoIcon from '$lib/components/icons/FileVideoIcon.svelte';
-	import LayersIcon from '$lib/components/icons/LayersIcon.svelte';
+	import {
+		FileAudioIcon,
+		FileVideoIcon,
+		Gif01Icon,
+		Queue01Icon,
+		Settings02Icon,
+		SubtitleIcon
+	} from '@hugeicons/core-free-icons';
+	import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/svelte';
 
-	let container: HTMLElement;
+	type Feature = {
+		title: string;
+		description: string;
+		icon: IconSvgElement;
+	};
 
-	onMount(() => {
-		let splits: SplitText[] = [];
-		let mounted = true;
-
-		const init = async () => {
-			await document.fonts.ready;
-			if (!mounted) return;
-
-			const gridItems = container.querySelectorAll('.grid-feature');
-
-			gridItems.forEach((item, i) => {
-				const icon = item.querySelector('svg');
-				const textSplit = new SplitText(item.querySelectorAll('h3, p'), {
-					type: 'lines',
-					mask: 'lines'
-				});
-				splits.push(textSplit);
-
-				if (icon) {
-					gsap.fromTo(
-						icon,
-						{
-							scale: 0,
-							rotate: -10
-						},
-						{
-							scrollTrigger: {
-								trigger: item,
-								start: 'top 85%'
-							},
-							scale: 1,
-							rotate: 0,
-							duration: 0.8,
-							ease: 'back.out(1.7)',
-							delay: i * 0.5
-						}
-					);
-				}
-
-				gsap.fromTo(
-					textSplit.lines,
-					{ yPercent: 100 },
-					{
-						scrollTrigger: {
-							trigger: item,
-							start: 'top 85%'
-						},
-						yPercent: 0,
-						stagger: 0.1,
-						duration: 1.2,
-						ease: 'custom-ease',
-						delay: i * 0.5
-					}
-				);
-			});
-		};
-
-		init();
-
-		return () => {
-			mounted = false;
-			splits.forEach((s) => s.revert());
-		};
-	});
+	const featureRows: { left: Feature; right: Feature }[] = [
+		{
+			left: {
+				title: 'Batch conversion queue',
+				description:
+					'Add multiple files, choose which items should convert, then pause, resume, retry, or remove jobs while Frame tracks progress per file.',
+				icon: Queue01Icon
+			},
+			right: {
+				title: 'Audio formats and levels',
+				description:
+					'Convert to MP3, M4A, WAV, or FLAC with codec-aware bitrate or quality controls, channel selection, volume, and normalization.',
+				icon: FileAudioIcon
+			}
+		},
+		{
+			left: {
+				title: 'Video encode or stream copy',
+				description:
+					'Re-encode with full codec and filter controls, or use Cut / Stream Copy for fast trim and remux workflows when the source allows it.',
+				icon: FileVideoIcon
+			},
+			right: {
+				title: 'GIF and image export',
+				description:
+					'Create GIFs with palette, dithering, loop, FPS, and scaling controls, or export still images as PNG, JPG, WebP, BMP, and TIFF.',
+				icon: Gif01Icon
+			}
+		},
+		{
+			left: {
+				title: 'Built-in output presets',
+				description:
+					'Start from real presets for Balanced MP4, Archive H.265, Web Share, GIF, audio-only, YouTube, TikTok/Reels, X, and Discord.',
+				icon: Settings02Icon
+			},
+			right: {
+				title: 'Subtitles and metadata',
+				description:
+					'Select subtitle tracks or burn captions with font, size, color, outline, and position controls, then preserve, clean, or replace metadata.',
+				icon: SubtitleIcon
+			}
+		}
+	];
 </script>
 
-<section
-	id="features"
-	bind:this={container}
-	class="lg:grid-cols-3 lg:divide-y-0 md:divide-x divide-gray-alpha-100 grid w-full grid-cols-1 divide-y"
->
+<section id="features" data-reveal-section class="relative overflow-hidden">
 	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
+		class="mx-auto grid max-w-5xl divide-y divide-dashed divide-frame-gray-100 border-dashed border-frame-gray-100 md:border-x"
 	>
-		<div class="gap-2 flex items-center">
-			<FileVideoIcon class="size-6 md:size-8 text-blue-700" />
-			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Universal Formats
-			</h3>
-		</div>
-		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Full support for MP4, MKV, WebM, MOV, GIF, MP3, M4A, WAV, and FLAC containers. Encode
-			efficiently with H.264, H.265, VP9, AV1, and Apple ProRes.
-		</p>
-	</div>
+		{#each featureRows as row (row.left.title)}
+			<div
+				class="grid grid-cols-1 divide-y divide-dashed divide-frame-gray-100 md:grid-cols-2 md:divide-x md:divide-y-0"
+			>
+				{#each [row.left, row.right] as feature (feature.title)}
+					<div data-reveal="feature-cell" class="flex h-full items-start gap-4 p-6">
+						<span
+							data-reveal="feature-icon"
+							class="card-highlight relative flex size-10 shrink-0 items-center justify-center rounded-sm bg-frame-gray-100 text-foreground shadow-sm"
+						>
+							<HugeiconsIcon icon={feature.icon} size={20} strokeWidth={1.5} aria-hidden="true" />
+						</span>
 
-	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
-	>
-		<div class="gap-2 flex items-center">
-			<CpuIcon class="size-6 md:size-8 text-blue-700" />
-			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Hardware Accelerated
-			</h3>
-		</div>
-		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Leverage native power with Apple Silicon and NVIDIA NVENC integration for lightning-fast,
-			battery-efficient encoding.
-		</p>
-	</div>
-
-	<div
-		class="px-4 md:px-8 py-8 gap-4 grid-feature hover:bg-blue-700/10 hover:ring-blue-700 flex flex-col ring-0 ring-transparent transition-all hover:ring-1"
-	>
-		<div class="gap-2 flex items-center">
-			<LayersIcon class="size-6 md:size-8 text-blue-700" />
-			<h3 class="text-foreground font-medium text-xl md:text-2xl tracking-tight leading-none">
-				Batch + AI Upscaling
-			</h3>
-		</div>
-		<p class="text-gray-alpha-600 leading-relaxed text-lg text-pretty">
-			Queue unlimited files with independent settings and upscale video using Real-ESRGAN (x2/x4).
-			Save your favorite configurations as custom presets for one-click reuse.
-		</p>
+						<div class="space-y-1">
+							<h2 class="text-lg font-medium text-foreground">{feature.title}</h2>
+							<p class="text-balance text-base leading-relaxed text-frame-gray-600">
+								{feature.description}
+							</p>
+						</div>
+					</div>
+				{/each}
+			</div>
+		{/each}
 	</div>
 </section>
