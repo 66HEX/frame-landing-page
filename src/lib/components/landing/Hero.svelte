@@ -28,7 +28,7 @@
 
 		<p class="max-w-2xl text-balance text-lg leading-relaxed text-frame-gray-600">
 			A native Rust media conversion utility for macOS, Windows, and Linux. Built with GPUI-CE and
-			powered by FFmpeg, FFprobe, and GStreamer.
+			powered by FFmpeg and FFprobe.
 		</p>
 
 		<div data-reveal="actions" class="flex w-full flex-row items-center justify-center gap-3">
