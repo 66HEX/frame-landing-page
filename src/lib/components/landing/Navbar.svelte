@@ -14,7 +14,7 @@
 		aria-label="Main navigation"
 	>
 		<a href={resolve('/')} class="inline-flex items-center text-sm font-medium">
-			<img src="/favicon.svg" alt="" class="size-6" />
+			<img src="/frame.svg" alt="" class="size-6" />
 		</a>
 
 		<ul class="hidden flex-row items-center gap-2 text-sm max-sm:hidden md:flex">
