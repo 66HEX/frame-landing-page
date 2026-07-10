@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import FAQ from '$lib/components/landing/FAQ.svelte';
 	import Features from '$lib/components/landing/Features.svelte';
@@ -12,11 +13,10 @@
 		fallbackReleaseUrl,
 		formatPlatformLabel,
 		resolveInstallerForPlatform,
-		type FrameRelease,
 		type UserPlatform
 	} from '$lib/release';
 
-	const props = $props<{ data: { release: FrameRelease | null } }>();
+	const props = $props<{ data: PageData }>();
 
 	const release = $derived(props.data.release);
 	const releaseVersion = $derived(release?.version ?? null);
@@ -99,7 +99,11 @@
 	data-landing-anim-state={landingAnimationState}
 	class="relative mx-auto flex w-full max-w-7xl flex-1 flex-col divide-y divide-frame-gray-100 overflow-hidden border-frame-gray-100 md:border-x"
 >
-	<Hero downloadLabel={heroDownloadLabel} downloadUrl={primaryDownloadUrl} />
+	<Hero
+		downloadLabel={heroDownloadLabel}
+		downloadUrl={primaryDownloadUrl}
+		githubStars={props.data.githubStars}
+	/>
 	<Features />
 	<Story />
 	<FAQ />

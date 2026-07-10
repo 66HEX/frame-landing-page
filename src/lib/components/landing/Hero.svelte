@@ -8,7 +8,17 @@
 	const props = $props<{
 		downloadLabel: string;
 		downloadUrl: string;
+		githubStars?: number | null;
 	}>();
+
+	const formattedGithubStars = $derived(
+		typeof props.githubStars === 'number'
+			? new Intl.NumberFormat('en-US', {
+					notation: 'compact',
+					maximumFractionDigits: 1
+				}).format(props.githubStars)
+			: '--'
+	);
 </script>
 
 <section data-reveal-section class="relative overflow-hidden">
@@ -40,6 +50,8 @@
 			<Button variant="secondary" href={repositoryUrl} target="_blank" rel="noreferrer">
 				<HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={1.5} aria-hidden="true" />
 				Github
+				<span aria-hidden="true" class="text-frame-gray-600/45">|</span>
+				<span>{formattedGithubStars}</span>
 			</Button>
 		</div>
 
